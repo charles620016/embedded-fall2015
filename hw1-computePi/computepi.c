@@ -18,32 +18,12 @@ double computePi_pi_openmp(size_t N){
     double pi = 0.0;
     double dt = 1.0 / N;
     double x;
-
     #pragma omp parallel num_threads(omp_get_max_threads()) 
     {
         #pragma omp for private(x) reduction(+:pi)
         for (size_t i = 0; i < N; i++) {
             x = (double) i / N;
             pi += dt / (1.0 + x * x);
-        }
-    }
-    return pi * 4.0;    
-}
-
-double computePi_pi_openmp_v2(size_t N){
-    double pi[4] = 0.0;
-    double dt = 1.0 / N;
-    double x;
-
-    #pragma omp parallel num_threads(omp_get_max_threads()) 
-    {   
-        #pragma omp sections
-        {
-            #pragma omp for private(x) reduction(+:pi)
-            for (size_t i = 0; i < N/4; i++) {
-                x = (double) i / N;
-                pi += dt / (1.0 + x * x);
-            }
         }
     }
     return pi * 4.0;    

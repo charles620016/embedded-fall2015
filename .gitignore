@@ -33,3 +33,5 @@
 
 # Others
 *.pdf
+*.csv
+perf*

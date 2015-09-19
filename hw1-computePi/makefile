@@ -16,4 +16,4 @@ run:
 	done > result.csv
 
 clean:
-	rm -f $(EXECUTABLE) *.o *.csv
+	rm -f $(EXECUTABLE) *.o
