@@ -20,3 +20,16 @@ make
 # Get the execution time of each version of compute_pi(), it may take a few minutes to complete the benchmark 
 make run
 ```
+
+**Performance**
+
+```
+`$ ./main`
+N = 300000000 , max threads = 4
+pi = 3.1415926569 ,   Baseline verison: 7.042201 sec
+pi = 3.1415926569 ,     Openmp verison: 7.868701 sec
+pi = 3.1415926569 ,        AVX verison: 3.093771 sec
+pi = 3.1415926569 , AVX+unroll verison: 1.515055 sec
+```
+
+![](https://raw.githubusercontent.com/charles620016/embedded-fall2015/master/hw1-computePi/screenshot/performance.png)
