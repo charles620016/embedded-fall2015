@@ -10,7 +10,7 @@ default: computepi.o
 	$(CC) -c $(CFLAGS) $< -o $@ 
 
 run:
-	for i in `seq 1000 5000 2001000`; do \
+	for i in `seq 1000 5000 2501000`; do \
 		printf "%d," $$i;\
 		./benchmark $$i; \
 	done > result.csv

@@ -14,19 +14,25 @@ int main()
     pi = compute_pi_baseline(N);
     end = clock();
     printf("pi = %.10lf , ", pi);
-    printf("%18s%lf sec\n", "Baseline verison: ", ((double) (end - start)) / CLOCKS_PER_SEC);
+    printf("%20s%lf sec\n", "Baseline verison: ", ((double) (end - start)) / CLOCKS_PER_SEC);
 
     start = clock();
     pi = computePi_pi_openmp(N);
     end = clock();
     printf("pi = %.10lf , ", pi);
-    printf("%18s%lf sec\n", "Openmp verison: ",((double) (end - start)) / CLOCKS_PER_SEC);
+    printf("%20s%lf sec\n", "Openmp verison: ",((double) (end - start)) / CLOCKS_PER_SEC);
 
     start = clock();
     pi = computePi_pi_avx(N);
     end = clock();
     printf("pi = %.10lf , ", pi);
-    printf("%18s%lf sec\n", "AVX verison: ", ((double) (end - start)) / CLOCKS_PER_SEC);
+    printf("%20s%lf sec\n", "AVX verison: ", ((double) (end - start)) / CLOCKS_PER_SEC);
+
+    start = clock();
+    pi = computePi_pi_avx_unroll(N);
+    end = clock();
+    printf("pi = %.10lf , ", pi);
+    printf("%20s%lf sec\n", "AVX+unroll verison: ", ((double) (end - start)) / CLOCKS_PER_SEC);
 
     return 0;
 }
