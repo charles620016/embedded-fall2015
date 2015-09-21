@@ -6,7 +6,7 @@
 
 int main(int argc, char const *argv[])
 {   
-    time_t start, end;
+    clock_t start, end;
     int N = atoi(argv[1]);
     int i, loop = 20;
 

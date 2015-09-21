@@ -5,9 +5,9 @@
 
 int main()
 {   
-    time_t start, end;
+    clock_t start, end;
     double pi;
-    int N = 300000000;
+    int N = 3000000000;
     printf("N = %d , max threads = %d\n", N, omp_get_max_threads());
 
     start = clock();
