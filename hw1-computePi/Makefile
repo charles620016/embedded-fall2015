@@ -1,13 +1,19 @@
 CC = gcc
 CFLAGS = -O0 -std=gnu99 -Wall -fopenmp -mavx
+LDFLAGS = -lgomp
 EXECUTABLE = main benchmark  
 
-default: computepi.o
-	$(CC) $(CFLAGS) computepi.o main.c -o main
+default: computepi.o computepi.s
+	$(CC) $(CFLAGS) $(LDFLAGS) computepi.o main.c -o main
 	$(CC) $(CFLAGS) computepi.o benchmark.c -o benchmark
+
+.PHONY: clean default
 
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@ 
+
+%.s: %.c
+	$(CC) -S $(CFLAGS) $< -o $@
 
 run:
 	for i in `seq 1000 5000 2501000`; do \
@@ -16,4 +22,4 @@ run:
 	done > result.csv
 
 clean:
-	rm -f $(EXECUTABLE) *.o
+	rm -f $(EXECUTABLE) *.o *.s

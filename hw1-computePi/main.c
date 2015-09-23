@@ -1,38 +1,37 @@
 #include <stdio.h>
 #include <time.h>
+#include <sys/time.h>
 #include <omp.h>
 #include "computepi.h"
 
 int main()
 {   
-    clock_t start, end;
+    struct timespec start = {0, 0};
+    struct timespec end = {0, 0};
+    int N = 300000000;
     double pi;
-    int N = 3000000000;
     printf("N = %d , max threads = %d\n", N, omp_get_max_threads());
 
-    start = clock();
-    pi = compute_pi_baseline(N);
-    end = clock();
-    printf("pi = %.10lf , ", pi);
-    printf("%20s%lf sec\n", "Baseline verison: ", ((double) (end - start)) / CLOCKS_PER_SEC);
 
-    start = clock();
+    clock_gettime(CLOCK_MONOTONIC, &start);
     pi = computePi_pi_openmp(N);
-    end = clock();
+    clock_gettime(CLOCK_MONOTONIC, &end);
     printf("pi = %.10lf , ", pi);
-    printf("%20s%lf sec\n", "Openmp verison: ",((double) (end - start)) / CLOCKS_PER_SEC);
+    printf("%20s%lf sec\n", "Openmp verison: ",(double)   (end.tv_sec - start.tv_sec)
+                                +(double) (end.tv_nsec - start.tv_nsec)/1000000000.0);
 
-    start = clock();
+    clock_gettime(CLOCK_MONOTONIC, &start);
     pi = computePi_pi_avx(N);
-    end = clock();
+    clock_gettime(CLOCK_MONOTONIC, &end);
     printf("pi = %.10lf , ", pi);
-    printf("%20s%lf sec\n", "AVX verison: ", ((double) (end - start)) / CLOCKS_PER_SEC);
+    printf("%20s%lf sec\n", "AVX verison: ", (double)  (end.tv_sec - start.tv_sec)
+                                + (end.tv_nsec - start.tv_nsec)/1000000000.0);
 
-    start = clock();
+    clock_gettime(CLOCK_MONOTONIC, &start);
     pi = computePi_pi_avx_unroll(N);
-    end = clock();
+    clock_gettime(CLOCK_MONOTONIC, &end);
     printf("pi = %.10lf , ", pi);
-    printf("%20s%lf sec\n", "AVX+unroll verison: ", ((double) (end - start)) / CLOCKS_PER_SEC);
-
+    printf("%20s%lf sec\n", "AVX+unroll verison: ", (double) (end.tv_sec - start.tv_sec)
+                                + (end.tv_nsec - start.tv_nsec)/1000000000.0);
     return 0;
 }
