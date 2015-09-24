@@ -14,11 +14,11 @@ double compute_pi_baseline(size_t N)
     return pi * 4.0;
 }
 
-double computePi_pi_openmp(size_t N){
+double compute_pi_openmp(size_t N, int threads){
     double pi = 0.0;
     double dt = 1.0 / N;
     double x;
-    #pragma omp parallel num_threads(omp_get_max_threads()) 
+    #pragma omp parallel num_threads(threads) 
     {
         #pragma omp for private(x) reduction(+:pi)
         for (size_t i = 0; i < N; i++) {
@@ -29,7 +29,7 @@ double computePi_pi_openmp(size_t N){
     return pi * 4.0;    
 }
  
-double computePi_pi_avx(size_t N)
+double compute_pi_avx(size_t N)
 {
     double pi = 0.0;
     double dt = 1.0 / N;
@@ -53,7 +53,7 @@ double computePi_pi_avx(size_t N)
     return pi * 4.0;
 }
 
-double computePi_pi_avx_unroll(size_t N)
+double compute_pi_avx_unroll(size_t N)
 {
     double pi = 0.0;
     double dt = 1.0 / N;
