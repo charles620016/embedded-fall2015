@@ -8,28 +8,38 @@
 
 相關連結：[Leibniz formula for π](https://en.wikipedia.org/wiki/Leibniz_formula_for_%CF%80)
 
-
-**Usage**
-
-```c
-make
-
-# Get the value of pi
-./main
-
-# Get the execution time of each version of compute_pi(), it may take a few minutes to complete the benchmark 
-make run
-```
-
 **Performance**
 
 ```
-`$ ./main`
-N = 300000000 , max threads = 4
-pi = 3.1415926569 ,   Baseline verison: 7.042201 sec
-pi = 3.1415926569 ,     Openmp verison: 7.868701 sec
-pi = 3.1415926569 ,        AVX verison: 3.093771 sec
-pi = 3.1415926569 , AVX+unroll verison: 1.515055 sec
+`$ time ./main_clock`
+N = 300000000
+pi = 3.1415926569 ,           Baseline verison: 7.057064 sec
+pi = 3.1415926569 ,  Openmp verison(2 threads): 7.542519 sec
+pi = 3.1415926569 ,  Openmp verison(4 threads): 7.811580 sec
+pi = 3.1415926569 ,                AVX verison: 3.092924 sec
+pi = 3.1415926569 ,         AVX+unroll verison: 1.511960 sec
+
+real    0m17.477s
+user    0m27.004s
+sys     0m0.012s
 ```
 
-![](https://raw.githubusercontent.com/charles620016/embedded-fall2015/master/hw1-computePi/screenshot/performance.png)
+```
+`$ time ./main_clock_gettime `
+N = 300000000
+pi = 3.1415926569 ,           Baseline verison: 7.068764 sec
+pi = 3.1415926569 ,  Openmp verison(2 threads): 3.772730 sec
+pi = 3.1415926569 ,  Openmp verison(4 threads): 2.049751 sec
+pi = 3.1415926569 ,                AVX verison: 3.087221 sec
+pi = 3.1415926569 ,         AVX+unroll verison: 1.511760 sec
+
+real    0m17.493s
+user    0m27.032s
+sys     0m0.000s
+
+```
+
+![](https://raw.githubusercontent.com/charles620016/embedded-fall2015/master/hw1-computePi/screenshot/CPU_time.png)
+
+![](https://raw.githubusercontent.com/charles620016/embedded-fall2015/master/hw1-computePi/screenshot/Wall-clock_time.png)
+
