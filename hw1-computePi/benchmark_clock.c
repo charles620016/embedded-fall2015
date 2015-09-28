@@ -8,7 +8,7 @@ int main(int argc, char const *argv[])
     clock_t start, end;
     int N = atoi(argv[1]);
     int i, loop = 25;
-
+    
     // Baseline
     start = clock();
     for(i = 0; i < loop; i++){
