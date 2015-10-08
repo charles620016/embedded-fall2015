@@ -1,7 +1,7 @@
-#include "fuzzysearch.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "fuzzysearch.h"
 
 int minimum(int x, int y, int z)
 {
@@ -23,9 +23,6 @@ int lev_dist_recursive(char *a, int len_a, char *b, int len_b)
     else
         cost = 1;
 
-    /* return minimum of delete char from a, delete char from b,
-     * and delete char from both
-     */
     return minimum(lev_dist_recursive(a, len_a - 1, b, len_b) + 1,         // deletion
                    lev_dist_recursive(a, len_a, b, len_b - 1) + 1,         // insertion
                    lev_dist_recursive(a, len_a - 1, b, len_b - 1) + cost); // substitution
