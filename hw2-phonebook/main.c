@@ -104,7 +104,7 @@ int main(int argc, char *argv[])
     __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
 #endif
 
-    /* check the program before compute the execution time*/
+    /* check the program before computing the execution time*/
 #if defined(ORIG) || defined(OPT1)
     for (int j = 0; j < INPUT_SIZE; j++) {
         assert(findName(input[j], e) != NULL &&

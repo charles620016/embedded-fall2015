@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+
 #define DICT_FILE "./dictionary/words.txt"
 
 int main(int argc, char const *argv[])
@@ -14,7 +15,7 @@ int main(int argc, char const *argv[])
     }
     int count = 0;
     int total = 0;
-    
+
     while (fgets(line, sizeof(line), fp)) {
         while (line[i] != '\0')
             i++;
@@ -27,5 +28,6 @@ int main(int argc, char const *argv[])
         count++;
     }
     printf("\n%d\n", total);
+
     return 0;
 }
