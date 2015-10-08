@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
         line[i - 1] = '\0';
         i = 0;
         if ((count % 5000) == 0) {
-            printf("\"%s\",", line);
+            printf("%s,", line);
             total++;
         }
         count++;
