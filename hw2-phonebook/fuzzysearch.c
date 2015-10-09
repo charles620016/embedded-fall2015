@@ -11,17 +11,13 @@ int minimum(int x, int y, int z)
 
 int lev_dist_recursive(char *a, int len_a, char *b, int len_b)
 {
-    int cost;
-
     /* base case: empty strings */
     if (len_a == 0) return len_b;
     if (len_b == 0) return len_a;
 
     /* test if last characters of the strings match */
-    if (a[len_a - 1] == b[len_b - 1])
-        cost = 0;
-    else
-        cost = 1;
+    int cost;
+    cost = a[len_a - 1] == b[len_b - 1] ? 0 : 1;
 
     return minimum(lev_dist_recursive(a, len_a - 1, b, len_b) + 1,         // deletion
                    lev_dist_recursive(a, len_a, b, len_b - 1) + 1,         // insertion
