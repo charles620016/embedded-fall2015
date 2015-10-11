@@ -6,7 +6,7 @@
 entry *findName(char *key, hashTable *ht)
 {
     entry *e;
-    hashIndex index = hash1(key, ht);
+    hashIndex index = hash2(key, ht);
     /* search the bucket */
     for (e = ht->list[index]; e != NULL; e = e->pNext) {
         if (strcasecmp(key, e->lastName) == 0) {
@@ -18,7 +18,7 @@ entry *findName(char *key, hashTable *ht)
 
 int append(char *key, hashTable *ht)
 {
-    hashIndex index = hash1(key, ht);
+    hashIndex index = hash2(key, ht);
     entry *newEntry;
     // entry *currentEntry;
 

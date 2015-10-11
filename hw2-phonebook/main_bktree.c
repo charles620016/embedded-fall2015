@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 #include <assert.h>
-#include "fuzzy_levenshtein.h"
+#include "fuzzy_bktree.h"
 
 #define DICT_FILE "./dictionary/all-names.txt"
 
@@ -35,16 +35,9 @@ int main(int argc, char *argv[])
         return -1;
     }
 
-    /* build the entry */
-    entry *pHead, *e;
-    pHead = (entry *) malloc(sizeof(entry));
-    printf("size of entry : %lu bytes\n", sizeof(entry));
-    e = pHead;
-    e->pNext = NULL;
-
-#if defined(__GNUC__)
-    __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
-#endif
+    /* build the root of bk-tree  */
+    bktree_node *root = NULL;
+    root = insert_bktree_node("ROOT", root);
 
     /* Original version
      * OR
@@ -56,7 +49,7 @@ int main(int argc, char *argv[])
             i++;
         line[i - 1] = '\0';
         i = 0;
-        e = append(line, e);
+        insert_bktree_node(line, root);
     }
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time1 = diff_in_second(start, end);
@@ -69,15 +62,9 @@ int main(int argc, char *argv[])
     int dist_range = 2;
     printf("input : %s , dist_range = %d\n", input, dist_range);
 
-    /* rewind the entry e to begining of list*/
-    e = pHead;
-
-#if defined(__GNUC__)
-    __builtin___clear_cache((char *) pHead, (char *) pHead + sizeof(entry));
-#endif
     /* compute the execution time */
     clock_gettime(CLOCK_REALTIME, &start);
-    search_list(input, e, dist_range);
+    search_bktree(input, root, dist_range);
     clock_gettime(CLOCK_REALTIME, &end);
     cpu_time2 = diff_in_second(start, end);
 
@@ -86,7 +73,6 @@ int main(int argc, char *argv[])
     printf("execution time of findName() : %lf sec\n", cpu_time2);
 
     /* release all allocated entries */
-    free(pHead);
 
     return 0;
 }

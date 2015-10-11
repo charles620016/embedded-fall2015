@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "fuzzysearch.h"
+#include "fuzzy_levenshtein.h"
 
-int minimum(int x, int y, int z)
+static int minimum(int x, int y, int z) 
 {
     x = x < y ? x : y;
     return x < z ? x : z;
-}
+} 
 
 int lev_dist_recursive(char *a, int len_a, char *b, int len_b)
 {
@@ -57,19 +57,6 @@ int lev_dist_iteration(char a[], int len_a, char b[], int len_b)
     return dist[len_a][len_b];
 }
 
-entry *findName(char lastName[], entry *pHead, int similarity)
-{
-    while (pHead != NULL) {
-        int dist = lev_dist_iteration(lastName, strlen(lastName), pHead->lastName,
-                                      strlen(pHead->lastName));
-        if (dist <= similarity) {
-            printf("dist = %d, %s\n", dist, pHead->lastName);
-        }
-        pHead = pHead->pNext;
-    }
-    return NULL;
-}
-
 entry *append(char lastName[], entry *e)
 {
     /* allocate memory for the new entry and put lastName in it.*/
@@ -80,3 +67,15 @@ entry *append(char lastName[], entry *e)
     return e;
 }
 
+entry *search_list(char lastName[], entry *pHead, int dist_range)
+{
+    while (pHead != NULL) {
+        int dist = lev_dist_iteration(lastName, strlen(lastName), pHead->lastName,
+                                      strlen(pHead->lastName));
+        if (dist <= dist_range) {
+            printf("dist = %d, %s\n", dist, pHead->lastName);
+        }
+        pHead = pHead->pNext;
+    }
+    return NULL;
+}
