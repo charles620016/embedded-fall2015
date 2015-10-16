@@ -1,6 +1,6 @@
 ###*embedded-fall2015*
 
-Homework assignments in the Advanced Practcal Embedded System Development and Implementation class
+Homework assignments in the Advanced Practical Embedded System Development and Implementation class
 
 <br />
 
