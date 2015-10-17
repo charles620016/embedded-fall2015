@@ -19,8 +19,8 @@ int main(int argc, char const *argv[])
 #endif
 
     assert(smallest_character(alphabet, 'a')=='b' && "error : input->a");
-    assert(smallest_character(alphabet, 'n')=='o' && "error : input->d");
-    assert(smallest_character(alphabet, 'x')=='y' && "error : input->d");
+    assert(smallest_character(alphabet, 'n')=='o' && "error : input->n");
+    assert(smallest_character(alphabet, 'x')=='y' && "error : input->x");
     assert(smallest_character(alphabet, 'z')=='a' && "error : input->z");
     
     printf("Pass the test!\n");
