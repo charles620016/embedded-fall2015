@@ -1,11 +1,14 @@
-char smallest_character(char str[], char c, int index)
+char _smallest_character(char str[], char c, int index)
 {
-    /* check if the index is out of bound first*/
-    if (str[index] != 127) {
+    if (str[index] != '\0') {
         if (str[index] <= c)
-            return smallest_character(str, c, ++index);
+            return _smallest_character(str, c, ++index);
         return str[index];
     }
-    /* out of bound, return str[0]*/
     return str[0];
+}
+
+char smallest_character(char str[], char c){
+    char a = _smallest_character(str, c, 0);
+    return a;
 }
